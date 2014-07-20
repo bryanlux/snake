@@ -166,14 +166,14 @@ var inverseDirection = {
   'down': 'up'
 };
 
-function getKey(value){
-  for (var key in keys){
-    if (keys[key] instanceof Array && keys[key].indexOf(value) >= 0){
-      return key;
-    }
-  }
-  return null;
-}
+// function getKey(value){
+//   for (var key in keys){
+//     if (keys[key] instanceof Array && keys[key].indexOf(value) >= 0){
+//       return key;
+//     }
+//   }
+//   return null;
+// }
 
 // addEventListener("keydown", function (e) {
 // 	var el = document.getElementById('the-game')
@@ -210,7 +210,7 @@ addEventListener('load', function(){
 					  }
 			  
 					hidetimer = setTimeout(function(){
-						inner.style.background = ''
+						// inner.style.background = ''
 					}, 1000)
 				}
 
@@ -286,7 +286,7 @@ function swipedetect(el, callback){
 	}, false)
 
 	if (!detecttouch){
-		addEventListener('mousedown', function(e){
+		document.body.addEventListener('mousedown', function(e){
 			if ( isContained(touchsurface, e) ){
 				var touchobj = e
 				swipedir = 'none'
@@ -299,11 +299,11 @@ function swipedetect(el, callback){
 			}
 		}, false)
 
-		addEventListener('mousemove', function(e){
+		document.body.addEventListener('mousemove', function(e){
 			e.preventDefault() // prevent scrolling when inside DIV
 		}, false)
 
-		addEventListener('mouseup', function(e){
+		document.body.addEventListener('mouseup', function(e){
 			if (ismousedown){
 				var touchobj = e
 				distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
@@ -325,5 +325,5 @@ function swipedetect(el, callback){
 		}, false)
 	}
 }
-		
+				
 requestAnimationFrame(loop);

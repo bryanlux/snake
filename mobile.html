@@ -28,6 +28,17 @@
 		top:1px;
 	}
 	</style>
+	<script>
+		function isContained(m, e){
+			var e=e||window.event
+			var c=/(click)|(mousedown)|(mouseup)/i.test(e.type)? e.target : ( e.relatedTarget || ((e.type=="mouseover")? e.fromElement : e.toElement) )
+			while (c && c!=m)try {c=c.parentNode} catch(e){c=m}
+			if (c==m)
+				return true
+			else
+				return false
+		}
+	</script>
 <body>
 <div>
   <canvas id="the-game" width="800" height="600">
@@ -39,7 +50,7 @@
 New food may appear under snake, uncoil to reveal.<br>
 Collect the food to grow and increase speed.
 </p>
-<p><center><div class='status'>Status: </div></center></p>
+<p><center><h1 id='status'>Status: </h1></center></p>
 <script type="text/javascript" src="touchgame.js"></script>
 </body>
 </html>
