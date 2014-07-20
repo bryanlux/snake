@@ -16,7 +16,7 @@
 		width: 300px;
 		height: 300px;
 		border: 1px solid orange;
-		background: lightyellow url(arrows.png) center center no-repeat;
+		background: lightyellow;
 		}
 
 		#touchsurface2 #inner{
@@ -35,88 +35,6 @@
 			else
 				return false
 		}
-
-		// Demo 1:
-
-		window.addEventListener('load', function(){
-
-			var touchsurface = document.getElementById('touchsurface'),
-					detecttouch = !!('ontouchstart' in window) || !!('ontouchstart' in document.documentElement) || !!window.ontouchstart || !!window.Touch || !!window.onmsgesturechange || (window.DocumentTouch && window.document instanceof window.DocumentTouch),
-					startX,
-					startY,
-					dist,
-					threshold = 150,
-					allowedTime = 200,
-					elapsedTime,
-					startTime,
-					ismousedown = false
-
-			function handleswipe(isrightswipe){
-				if (isrightswipe)
-					touchsurface.innerHTML = 'Congrats, you\'ve made a <span style="color:red">right swipe!</span>'
-				else{
-					touchsurface.innerHTML = 'Condition for right swipe not met yet'
-				}
-			}
-
-			touchsurface.addEventListener('touchstart', function(e){
-				touchsurface.innerHTML = ''
-				var touchobj = e.changedTouches[0]
-				dist = 0
-				startX = touchobj.pageX
-				startY = touchobj.pageY
-				startTime = new Date().getTime() // record time when finger first makes contact with surface
-				e.preventDefault()
-
-			}, false)
-
-			touchsurface.addEventListener('touchmove', function(e){
-				e.preventDefault() // prevent scrolling when inside DIV
-			}, false)
-
-			touchsurface.addEventListener('touchend', function(e){
-				var touchobj = e.changedTouches[0]
-				dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
-				elapsedTime = new Date().getTime() - startTime // get time elapsed
-				// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-				var swiperightBol = (elapsedTime <= allowedTime && dist >= threshold && Math.abs(touchobj.pageY - startY) <= 100)
-				handleswipe(swiperightBol)
-				e.preventDefault()
-			}, false)
-
-			if (!detecttouch){
-				document.body.addEventListener('mousedown', function(e){
-					if ( isContained(touchsurface, e) ){
-						touchsurface.innerHTML = ''
-						var touchobj = e
-						dist = 0
-						startX = touchobj.pageX
-						startY = touchobj.pageY
-						startTime = new Date().getTime() // record time when finger first makes contact with surface
-						ismousedown = true
-						e.preventDefault()
-					}
-				}, false)
-
-				document.body.addEventListener('mousemove', function(e){
-					e.preventDefault() // prevent scrolling when inside DIV
-				}, false)
-
-				document.body.addEventListener('mouseup', function(e){
-					if (ismousedown){
-						var touchobj = e
-						dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
-						elapsedTime = new Date().getTime() - startTime // get time elapsed
-						// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-						var swiperightBol = (elapsedTime <= allowedTime && dist >= threshold && Math.abs(touchobj.pageY - startY) <= 100)
-						handleswipe(swiperightBol)
-						ismousedown = false
-						e.preventDefault()
-					}
-				}, false)
-			}
-		}, false)
-
 		// Demo 2:
 
 		function swipedetect(el, callback){
@@ -217,23 +135,24 @@
 			swipedetect(el, function(swipedir){
 				if (swipedir != 'none'){
 					clearTimeout(hidetimer)
-					var bgimage = swipedir + 'arrow.png'
-					inner.style.background = 'transparent url(' + bgimage + ') center center no-repeat'
+					touchsurface.innerHTML = 'Swipe: <span style="color:red">' + text + 'right swipe!</span>'
 					hidetimer = setTimeout(function(){
 						inner.style.background = ''
 					}, 1000)
 				}
 
 			})
+			
+			function handleswipe(text){
+				touchsurface.innerHTML = 'Swipe: <span style="color:red">' + text + 'right swipe!</span>'
+			}
+			
 		}, false)
 
 
 	</script>
 </head>
 <body>
-
-<h1>Demo 1</h1>
-<div id="touchsurface">Swipe Me</div>
 
 <h1> Demo 2 </h2>
 <div id="touchsurface2">
