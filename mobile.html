@@ -2,6 +2,93 @@
 <html>
 <head>
 	<title>Mobile Test</title>
+<!-- 	<link rel="stylesheet" type="text/css" href="../jkincludes/articles.css" /> -->
+	<style>
+		.box{
+		width: 150px;
+		height: 150px;
+		padding: 10px;
+		border: 1px solid orange;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		background: lightyellow;
+		}
+	</style>
+	<!--<script type="text/javascript" src="touch.js"></script> -->
+	<script>
+		function isContained(m, e){
+			var e=e||window.event
+			var c=/(click)|(mousedown)|(mouseup)/i.test(e.type)? e.target : ( e.relatedTarget || ((e.type=="mouseover")? e.fromElement : e.toElement) )
+			while (c && c!=m)try {c=c.parentNode} catch(e){c=m}
+			if (c==m)
+				return true
+			else
+				return false
+		}
+		
+		window.addEventListener('load', function(){
+
+			var box1 = document.getElementById('box1')
+			var statusdiv = document.getElementById('statusdiv')
+			var startx = 0
+			var dist = 0
+			var detecttouch = !!('ontouchstart' in window) || !!('ontouchstart' in document.documentElement) || !!window.ontouchstart || !!window.Touch || !!window.onmsgesturechange || (window.DocumentTouch && window.document instanceof window.DocumentTouch)
+			var ismousedown = false
+	
+			box1.addEventListener('touchstart', function(e){
+				var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
+				startx = parseInt(touchobj.clientX)
+				statusdiv.innerHTML = 'Status: touchstart<br /> ClientX: ' + startx + 'px'
+				e.preventDefault()
+			}, false)
+	
+			box1.addEventListener('touchmove', function(e){
+				var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
+				var dist = parseInt(touchobj.clientX) - startx
+				statusdiv.innerHTML = 'Status: touchmove<br /> Horizontal distance traveled: ' + dist + 'px'
+				e.preventDefault()
+			}, false)
+	
+			box1.addEventListener('touchend', function(e){
+				var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
+				statusdiv.innerHTML = 'Status: touchend<br /> Resting x coordinate: ' + touchobj.clientX + 'px'
+				e.preventDefault()
+			}, false)
+	
+			if (!detecttouch){
+
+				document.body.addEventListener('mousedown', function(e){
+					if ( isContained(box1, e) ){
+						var touchobj = e
+						ismousedown = true
+						startx = parseInt(touchobj.clientX)
+						statusdiv.innerHTML = 'Status: touchstart<br /> ClientX: ' + startx + 'px'
+						e.preventDefault()
+					}
+				}, false)
+		
+				document.body.addEventListener('mousemove', function(e){
+					if (ismousedown){
+						var touchobj = e
+						var dist = parseInt(touchobj.clientX) - startx
+						statusdiv.innerHTML = 'Status: touchmove<br /> Horizontal distance traveled: ' + dist + 'px'
+						e.preventDefault()
+					}
+				}, false)
+		
+				document.body.addEventListener('mouseup', function(e){
+					var touchobj = e
+					ismousedown = false
+					statusdiv.innerHTML = 'Status: touchend<br /> Resting x coordinate: ' + touchobj.clientX + 'px'
+					e.preventDefault()
+				}, false)
+
+		
+			}
+
+		}, false)
+	</script>
 </head>
 <body>
 
@@ -10,6 +97,6 @@
 </div>
  
 <h3 id="statusdiv">Status</h3>
-<script type="text/javascript" src="game.js"></script>
+
 </body>
 </html>
