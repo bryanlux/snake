@@ -166,35 +166,6 @@ var inverseDirection = {
   'down': 'up'
 };
 
-// function getKey(value){
-//   for (var key in keys){
-//     if (keys[key] instanceof Array && keys[key].indexOf(value) >= 0){
-//       return key;
-//     }
-//   }
-//   return null;
-// }
-
-// addEventListener("keydown", function (e) {
-// 	var el = document.getElementById('the-game')
-// 	var hidetimer = null
-// 	var status = document.getElementById('status')
-//     var lastKey = swipedetect(el, function(swipedir){
-// 		if (swipedir != 'none'){
-// 			clearTimeout(hidetimer)
-// 			status.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
-// 			hidetimer = setTimeout(function(){
-// 				inner.style.background = ''
-// 			}, 1000)
-// 			}
-// 			})			
-//     if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
-//         && lastKey != inverseDirection[snake.direction]) {
-//       snake.direction = lastKey;
-//     } 
-//     
-// }, false);
-
 addEventListener('load', function(){
 			var el = document.getElementById('the-game')
 			var status = document.getElementById('status')
