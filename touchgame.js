@@ -166,14 +166,6 @@ var inverseDirection = {
   'down': 'up'
 };
 
-var keys = {
-  up: [38, 75, 87],
-  down: [40, 74, 83],
-  left: [37, 65, 72],
-  right: [39, 68, 76],
-  start_game: [13, 32]
-};
-
 function getKey(value){
   for (var key in keys){
     if (keys[key] instanceof Array && keys[key].indexOf(value) >= 0){
@@ -287,7 +279,7 @@ function swipedetect(el, callback){
 	}, false)
 
 	if (!detecttouch){
-		document.body.addEventListener('mousedown', function(e){
+		addEventListener('mousedown', function(e){
 			if ( isContained(touchsurface, e) ){
 				var touchobj = e
 				swipedir = 'none'
@@ -300,11 +292,11 @@ function swipedetect(el, callback){
 			}
 		}, false)
 
-		document.body.addEventListener('mousemove', function(e){
+		addEventListener('mousemove', function(e){
 			e.preventDefault() // prevent scrolling when inside DIV
 		}, false)
 
-		document.body.addEventListener('mouseup', function(e){
+		addEventListener('mouseup', function(e){
 			if (ismousedown){
 				var touchobj = e
 				distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
