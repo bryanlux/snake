@@ -175,41 +175,50 @@ function getKey(value){
   return null;
 }
 
-addEventListener("keydown", function (e) {
-	var el = document.getElementById('the-game')
-	var hidetimer = null
-	var status = document.getElementById('status')
-    var lastKey = swipedetect(el, function(swipedir){
-		if (swipedir != 'none'){
-			clearTimeout(hidetimer)
-			status.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
-			hidetimer = setTimeout(function(){
-				inner.style.background = ''
-			}, 1000)
-			}
-			})			
-    if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
-        && lastKey != inverseDirection[snake.direction]) {
-      snake.direction = lastKey;
-    } 
-    
-}, false);
+// addEventListener("keydown", function (e) {
+// 	var el = document.getElementById('the-game')
+// 	var hidetimer = null
+// 	var status = document.getElementById('status')
+//     var lastKey = swipedetect(el, function(swipedir){
+// 		if (swipedir != 'none'){
+// 			clearTimeout(hidetimer)
+// 			status.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
+// 			hidetimer = setTimeout(function(){
+// 				inner.style.background = ''
+// 			}, 1000)
+// 			}
+// 			})			
+//     if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
+//         && lastKey != inverseDirection[snake.direction]) {
+//       snake.direction = lastKey;
+//     } 
+//     
+// }, false);
 
-// addEventListener('load', function(){
-// 			var el = document.getElementById('the-game')
-// 			var inner = document.getElementById('inner')
-// 			var hidetimer = null
-// 			swipedetect(el, function(swipedir){
-// 				if (swipedir != 'none'){
-// 					clearTimeout(hidetimer)
-// 					//el.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
-// 					hidetimer = setTimeout(function(){
-// 						inner.style.background = ''
-// 					}, 1000)
-// 				}
-// 
-// 			})
-// 		}, false)
+addEventListener('load', function(){
+			var el = document.getElementById('the-game')
+			var status = document.getElementById('status')
+			var hidetimer = null
+			swipedetect(el, function(swipedir){
+				if (swipedir != 'none'){
+					clearTimeout(hidetimer)
+					status.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
+					var lastKey = swipedir
+					if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
+						&& lastKey != inverseDirection[snake.direction]) {
+					  snake.direction = lastKey;
+			  
+					hidetimer = setTimeout(function(){
+						inner.style.background = ''
+					}, 1000)
+				}
+
+			})
+			if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
+				&& lastKey != inverseDirection[snake.direction]) {
+			  snake.direction = lastKey;
+			} 
+		}, false)
 
 var requestAnimationFrame = window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
