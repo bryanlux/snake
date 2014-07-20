@@ -238,7 +238,7 @@ function loop() {
 }
 
 function swipedetect(el, callback){
-	var touchsurface = el,
+	var touchsurface = document.getElementById('the-game'),
 			swipedir,
 			startX,
 			startY,
