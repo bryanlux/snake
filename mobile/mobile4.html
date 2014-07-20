@@ -135,7 +135,7 @@
 			swipedetect(el, function(swipedir){
 				if (swipedir != 'none'){
 					clearTimeout(hidetimer)
-					touchsurface.innerHTML = 'Swipe: <span style="color:red">' + text + 'right swipe!</span>'
+					el.innerHTML = 'Swipe: <span style="color:red">' + swipedir + ' swipe!</span>'
 					hidetimer = setTimeout(function(){
 						inner.style.background = ''
 					}, 1000)
