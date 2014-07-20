@@ -207,6 +207,7 @@ addEventListener('load', function(){
 					if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
 						&& lastKey != inverseDirection[snake.direction]) {
 					  snake.direction = lastKey;
+					  }
 			  
 					hidetimer = setTimeout(function(){
 						inner.style.background = ''
@@ -214,10 +215,7 @@ addEventListener('load', function(){
 				}
 
 			})
-			if (['up', 'down', 'left', 'right'].indexOf(lastKey) >= 0
-				&& lastKey != inverseDirection[snake.direction]) {
-			  snake.direction = lastKey;
-			} 
+
 		}, false)
 
 var requestAnimationFrame = window.requestAnimationFrame ||
